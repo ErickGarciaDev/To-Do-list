@@ -1,0 +1,207 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(66, 66, 190);
+    text-align: center;
+    height: 100px;
+    border-bottom: 1px solid rgba(143, 142, 142, 0.062);
+}
+
+.span1 {
+    color: rgb(46, 145, 190);
+}
+
+body {
+    background-color: #1A1A1A;
+    width: 100vw;
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 40px auto;
+}
+
+.inputFields {
+    margin-top: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.selectContainer {
+    margin-top: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+select {
+    width: 100px;
+    text-align: center;
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#createButton {
+    margin: 20px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4EA8DE;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#createButton:hover {
+    transform: scale(1.02);
+}
+
+#title {
+    width: 300px;
+}
+
+#description {
+    width: 300px;
+}
+
+#tasksContainer {
+    flex-direction: column;
+    display: flex;
+    margin-top: 50px;
+    text-align: center;
+}
+
+#tasksContainer > h1 {
+    color: rgb(66, 66, 190);
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+#createdTasks {
+    height: 500px;
+    border-top: 1px solid #808080;
+    border-radius: 10px;
+    color: white;
+    overflow-y: scroll;
+}
+
+table {
+    width: 100%;
+}
+
+thead {
+    height: 50px;
+}
+
+tbody > tr {
+    height: auto;
+}
+
+tbody > tr > td {
+    padding-top: 20px;
+}
+
+.tdEvents {
+    display: flex;
+    gap: 2px;
+}
+
+
+.edit:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
+
+.delete:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
+
+#modalContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,.5);
+    display: none;
+}
+
+#modalContainer.active {
+    display: block;
+}
+
+#modal {
+    position: relative;
+    top: 20%;
+    background: white;
+    min-width: 300px;
+    padding: 40px;
+    border: 10px solid rgb(85, 110, 255);
+    box-shadow: 0 0 0 10px white;
+    height: 250px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.editInputFields {
+    margin-bottom: 20px;
+}
+
+#saveButton {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4EA8DE;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#saveButton:hover {
+    transform: scale(1.02);
+}
+
+#closeModal {
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border: 4px solid white;
+    border-radius: 50px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+    background: #e54;
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+}
+
+#search {
+    align-self: flex-end;
+    width: 150px;
+    margin: 20px 0;
+}

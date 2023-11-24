@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="assets/styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1><span class="span1">To</span>-Do<span class="span1">-List</span></h1>
+    </header>
+    <main>
+        <form action="">
+            <article class="inputFields">
+                <label for="title">Título da tarefa:</label>
+                <input type="text" name="title" id="title" required>
+            </article>
+            <article class="inputFields">
+                <label for="description">Descrição da tarefa:</label>
+                <input type="text" name="description" id="description" required>
+            </article>
+            <article class="selectContainer">
+                <label for="category">Categoria:</label>
+                <select name="categorias" id="category">
+                    <option value="Selecione" disabled selected>Categoria</option>
+                    <option value="Limpeza">Limpeza</option>
+                    <option value="lazer">Lazer</option>
+                    <option value="Estudo">Estudo</option>
+                    <option value="Trabalho">Trabalho</option>
+                    <option value="Cozinha">Cozinha</option>
+                </select>
+            </article>
+            <article class="inputFields">
+                <label for="expirationDate">Data de vencimento:</label>
+                <input type="date" name="Vencimento" id="expirationDate">
+            </article>
+            <div id="buttonContainer">
+                <button id="createButton">Criar Tarefa</button>
+            </div>
+        </form>
+
+        <section id="tasksContainer">
+            <h1>Tarefas</h1>
+            <input type="number" placeholder="Pesquise tarefas pelo id" id="search">
+            <div id="createdTasks">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Descrição</th>
+                            <th>Data de Expiração</th>
+                            <th>Categoria</th>
+                            <th>Id</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result"></tbody>
+                </table>
+                <div id="noResultSearch"></div>
+            </div>
+        </section>
+        <section id="modalContainer">
+            <article id="modal">
+                <form action="">
+                    <div id="closeModal">X</div>
+                    <article class="editInputFields">
+                        <label for="editTitle">Título da tarefa:</label>
+                        <input type="text" name="editTitle" id="editTitle" required>
+                    </article>
+                    <article class="editInputFields">
+                        <label for="editDescription">Descrição da tarefa:</label>
+                        <input type="text" name="editDescription" id="editDescription" required>
+                    </article>
+                    <article class="editInputFields">
+                        <label for="editCategory">Categoria:</label>
+                        <select name="categorias" id="editCategory">
+                            <option value="Selecione" disabled selected>Selecione</option>
+                            <option value="Limpeza">Limpeza</option>
+                            <option value="lazer">Lazer</option>
+                            <option value="Estudo">Estudo</option>
+                            <option value="Trabalho">Trabalho</option>
+                            <option value="Cozinha">Cozinha</option>
+                        </select>
+                    </article>
+                    <article class="editInputFields">
+                        <label for="editExpirationDate">Data de vencimento:</label>
+                        <input type="date" name="Vencimento" id="editExpirationDate">
+                    </article>
+                    <div id="editButtonContainer">
+                        <button id="saveButton"> Salvar</button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </main>
+    <script src="assets/index.js" type="module"></script>
+    <script src="assets/manipulateTasks.js" type="module"></script>
+</body>
+</html>
