@@ -63,185 +63,45 @@ function createTasksData(event) {
 }
 
 export function readTasks(tr) {
-    const tbody = document.getElementById('result')
+    try {
 
-    const titleElement = document.createElement('td')
-    const descriptionElement = document.createElement('td')
-    const dataElement = document.createElement('td')
-    const categoryElement = document.createElement('td')
-    const idElement = document.createElement('td')
-    const statusElement = document.createElement('td')
-    const spansColumn = document.createElement('td')
-    const editRow = document.createElement('span')
-    const deleteRow = document.createElement('span')
+        const tbody = document.getElementById('result')
 
-    spansColumn.appendChild(editRow)
-    spansColumn.appendChild(deleteRow)
+        const titleElement = document.createElement('td')
+        const descriptionElement = document.createElement('td')
+        const dataElement = document.createElement('td')
+        const categoryElement = document.createElement('td')
+        const idElement = document.createElement('td')
+        const statusElement = document.createElement('td')
+        const spansColumn = document.createElement('td')
+        const editRow = document.createElement('span')
+        const deleteRow = document.createElement('span')
 
-    spansColumn.setAttribute('class', 'tdEvents')
-    editRow.setAttribute('class', 'edit')
-    deleteRow.setAttribute('class', 'delete')
-    idElement.setAttribute('class', 'id')
+        spansColumn.appendChild(editRow)
+        spansColumn.appendChild(deleteRow)
 
-    const elements = [titleElement, descriptionElement, dataElement, categoryElement, idElement, statusElement, spansColumn]
+        spansColumn.setAttribute('class', 'tdEvents')
+        editRow.setAttribute('class', 'edit')
+        deleteRow.setAttribute('class', 'delete')
+        idElement.setAttribute('class', 'id')
 
-    if (tr) {
-        tbody.appendChild(tr)
+        const elements = [titleElement, descriptionElement, dataElement, categoryElement, idElement, statusElement, spansColumn]
 
-        for (const element of elements) {
-            tr.appendChild(element)
-        }
-
-        titleElement.innerHTML = tasks[tasks.length - 1].title
-        descriptionElement.innerHTML = tasks[tasks.length - 1].description
-        dataElement.innerHTML = tasks[tasks.length - 1].data
-        categoryElement.innerHTML = tasks[tasks.length - 1].category
-        idElement.innerHTML = tasks[tasks.length - 1].id
-        statusElement.innerHTML = tasks[tasks.length - 1].status
-        editRow.innerHTML = "✏️"
-        deleteRow.innerHTML = "❌"
-
-        tr.addEventListener('click', (event) => {
-            event.preventDefault()
-            const idElement = tr.querySelector('.id')
-            if (event.target.classList.value === 'edit') {
-                const modalContainer = document.querySelector('#modalContainer')
-                modalContainer.classList.add('active')
-                if (idElement) {
-                    const idValue = idElement.innerHTML
-                    editFunction(idValue)
-                }
-            } else if (event.target.classList.value === 'delete') {
-                if (idElement) {
-                    const idValue = idElement.innerHTML
-                    deleteFunction(idValue)
-                }
-            }
-        })
-
-    } else {
-        tbody.innerHTML = ''
-
-        tasks.forEach((task) => {
-            const newRow = document.createElement('tr');
-            newRow.setAttribute('class', 'resultSchema');
-
-            const titleElement = document.createElement('td');
-            titleElement.innerHTML = task.title
-            newRow.appendChild(titleElement)
-
-            const descriptionElement = document.createElement('td')
-            descriptionElement.innerHTML = task.description
-            newRow.appendChild(descriptionElement)
-
-            const dataElement = document.createElement('td')
-            dataElement.innerHTML = task.data
-            newRow.appendChild(dataElement)
-
-            const categoryElement = document.createElement('td')
-            categoryElement.innerHTML = task.category
-            newRow.appendChild(categoryElement)
-
-            const idElement = document.createElement('td')
-            idElement.innerHTML = task.id
-            idElement.classList.add('id')
-            newRow.appendChild(idElement)
-
-            const statusElement = document.createElement('td')
-            statusElement.innerHTML = task.status
-            newRow.appendChild(statusElement)
-
-            const spansColumn = document.createElement('td')
-            spansColumn.setAttribute('class', 'tdEvents')
-            spansColumn.innerHTML = `
-                <span class="edit">✏️</span>
-                <span class="delete">❌</span>
-            `
-            newRow.appendChild(spansColumn)
-
-            newRow.addEventListener('click', (event) => {
-                event.preventDefault()
-                const idElement = newRow.querySelector('.id')
-                if (event.target.classList.value === 'edit') {
-                    const modalContainer = document.querySelector('#modalContainer')
-                    modalContainer.classList.add('active')
-                    if (idElement) {
-                        const idValue = idElement.innerHTML
-                        editFunction(idValue)
-                    }
-                } else if (event.target.classList.value === 'delete') {
-                    if (idElement) {
-                        const idValue = idElement.innerHTML
-                        deleteFunction(idValue)
-                    }
-                }
-            })
-
-            tbody.appendChild(newRow)
-        })
-
-    }
-
-}
-
-export function manipulateTasks() {
-    return tasks
-}
-
-export function removeTask(newTasks) {
-    tasks = newTasks
-    readTasks()
-}
-
-export function editTask(editedTask) {
-    const taskIndex = tasks.findIndex((task) => task.id === Number(editedTask.id));
-
-    if (taskIndex !== -1) {
-        tasks[taskIndex] = {
-            id: tasks[taskIndex].id,
-            title: editedTask.title,
-            description: editedTask.description,
-            category: editedTask.category,
-            data: editedTask.data,
-            status: 'Em andamento'
-        }
-    }
-    readTasks()
-}
-
-export function searchIdTask(id) {
-    const tbody = document.getElementById('result')
-    const noResultSearch = document.getElementById('noResultSearch')
-
-    if (id.trim() === '') {
-        noResultSearch.innerHTML = ''
-        readTasks()
-        return
-    }
-
-    if (!isNaN(id)) {
-        const foundIndex = tasks.findIndex((task) => task.id === Number(id))
-        if (foundIndex !== -1) {
-            const tr = document.createElement('tr')
-            tr.setAttribute('class', 'resultSchema')
-
-            const elements = ['title', 'description', 'data', 'category', 'id', 'status']
-
-            tbody.innerHTML = ''
+        if (tr) {
+            tbody.appendChild(tr)
 
             for (const element of elements) {
-                const td = document.createElement('td')
-                tr.appendChild(td)
-                td.innerHTML = tasks[foundIndex][element]
+                tr.appendChild(element)
             }
 
-            const spansColumn = document.createElement('td')
-            spansColumn.setAttribute('class', 'tdEvents')
-            spansColumn.innerHTML = `
-                <span class="edit">✏️</span>
-                <span class="delete">❌</span>
-            `;
-            tr.appendChild(spansColumn);
+            titleElement.innerHTML = tasks[tasks.length - 1].title
+            descriptionElement.innerHTML = tasks[tasks.length - 1].description
+            dataElement.innerHTML = tasks[tasks.length - 1].data
+            categoryElement.innerHTML = tasks[tasks.length - 1].category
+            idElement.innerHTML = tasks[tasks.length - 1].id
+            statusElement.innerHTML = tasks[tasks.length - 1].status
+            editRow.innerHTML = "✏️"
+            deleteRow.innerHTML = "❌"
 
             tr.addEventListener('click', (event) => {
                 event.preventDefault()
@@ -261,14 +121,175 @@ export function searchIdTask(id) {
                 }
             })
 
-            tbody.appendChild(tr)
         } else {
             tbody.innerHTML = ''
-            noResultSearch.innerHTML = `Não encontrou a tarefa com o ID: ${id}`
-            noResultSearch.style.textAlign = 'center'
-            noResultSearch.style.color = 'white'
-            noResultSearch.style.marginTop = '20px'
+
+            tasks.forEach((task) => {
+                const newRow = document.createElement('tr');
+                newRow.setAttribute('class', 'resultSchema');
+
+                const titleElement = document.createElement('td');
+                titleElement.innerHTML = task.title
+                newRow.appendChild(titleElement)
+
+                const descriptionElement = document.createElement('td')
+                descriptionElement.innerHTML = task.description
+                newRow.appendChild(descriptionElement)
+
+                const dataElement = document.createElement('td')
+                dataElement.innerHTML = task.data
+                newRow.appendChild(dataElement)
+
+                const categoryElement = document.createElement('td')
+                categoryElement.innerHTML = task.category
+                newRow.appendChild(categoryElement)
+
+                const idElement = document.createElement('td')
+                idElement.innerHTML = task.id
+                idElement.classList.add('id')
+                newRow.appendChild(idElement)
+
+                const statusElement = document.createElement('td')
+                statusElement.innerHTML = task.status
+                newRow.appendChild(statusElement)
+
+                const spansColumn = document.createElement('td')
+                spansColumn.setAttribute('class', 'tdEvents')
+                spansColumn.innerHTML = `
+                <span class="edit">✏️</span>
+                <span class="delete">❌</span>
+            `
+                newRow.appendChild(spansColumn)
+
+                newRow.addEventListener('click', (event) => {
+                    event.preventDefault()
+                    const idElement = newRow.querySelector('.id')
+                    if (event.target.classList.value === 'edit') {
+                        const modalContainer = document.querySelector('#modalContainer')
+                        modalContainer.classList.add('active')
+                        if (idElement) {
+                            const idValue = idElement.innerHTML
+                            editFunction(idValue)
+                        }
+                    } else if (event.target.classList.value === 'delete') {
+                        if (idElement) {
+                            const idValue = idElement.innerHTML
+                            deleteFunction(idValue)
+                        }
+                    }
+                })
+
+                tbody.appendChild(newRow)
+            })
+
         }
+    } catch (error) {
+        throw new Error('Não foi possível listar as tarefas', error)
+    }
+
+}
+
+export function manipulateTasks() {
+    return tasks
+}
+
+export function removeTask(newTasks) {
+    try {
+
+        tasks = newTasks
+        readTasks()
+    } catch (error) {
+        throw new Error('Não foi possível deletar a tarefa', error)
+    }
+}
+
+export function editTask(editedTask) {
+    try {
+
+        const taskIndex = tasks.findIndex((task) => task.id === Number(editedTask.id));
+
+        if (taskIndex !== -1) {
+            tasks[taskIndex] = {
+                id: tasks[taskIndex].id,
+                title: editedTask.title,
+                description: editedTask.description,
+                category: editedTask.category,
+                data: editedTask.data,
+                status: 'Em andamento'
+            }
+        }
+        readTasks()
+    } catch (error) {
+        throw new Error('Não foi possível editar a tarefa', error)
+    }
+
+}
+
+export function searchIdTask(id) {
+    try {
+
+        const tbody = document.getElementById('result')
+        const noResultSearch = document.getElementById('noResultSearch')
+
+        if (id.trim() === '') {
+            noResultSearch.innerHTML = ''
+            readTasks()
+            return
+        }
+
+        if (!isNaN(id)) {
+            const foundIndex = tasks.findIndex((task) => task.id === Number(id))
+            if (foundIndex !== -1) {
+                const tr = document.createElement('tr')
+                tr.setAttribute('class', 'resultSchema')
+
+                const elements = ['title', 'description', 'data', 'category', 'id', 'status']
+
+                tbody.innerHTML = ''
+
+                for (const element of elements) {
+                    const td = document.createElement('td')
+                    tr.appendChild(td)
+                    td.innerHTML = tasks[foundIndex][element]
+                }
+
+                const spansColumn = document.createElement('td')
+                spansColumn.setAttribute('class', 'tdEvents')
+                spansColumn.innerHTML = `
+                <span class="edit">✏️</span>
+                <span class="delete">❌</span>
+            `;
+                tr.appendChild(spansColumn);
+
+                tr.addEventListener('click', (event) => {
+                    event.preventDefault()
+                    const idElement = tr.querySelector('.id')
+                    if (event.target.classList.value === 'edit') {
+                        const modalContainer = document.querySelector('#modalContainer')
+                        modalContainer.classList.add('active')
+                        if (idElement) {
+                            const idValue = idElement.innerHTML
+                            editFunction(idValue)
+                        }
+                    } else if (event.target.classList.value === 'delete') {
+                        if (idElement) {
+                            const idValue = idElement.innerHTML
+                            deleteFunction(idValue)
+                        }
+                    }
+                })
+
+                tbody.appendChild(tr)
+            } else {
+                tbody.innerHTML = ''
+                noResultSearch.innerHTML = `Não encontrou a tarefa com o ID: ${id}`
+                noResultSearch.style.textAlign = 'center'
+                noResultSearch.style.color = 'white'
+                noResultSearch.style.marginTop = '20px'
+            }
+        }
+    } catch (error) {
+        throw new Error('Não foi possível consultar as tarefas', error)
     }
 }
 
